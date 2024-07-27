@@ -1,31 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const logo = document.querySelector('.logo');
     const shareContainer = document.querySelector('.share-container');
-
-    logo.addEventListener('mouseenter', () => {
-        logo.style.transform = 'rotate(360deg)';
-        setTimeout(() => {
-            logo.style.transform = 'rotate(0deg)';
-        }, 600);
-    });
-
-    const sections = document.querySelectorAll('main, .related-posts, footer');
-    const options = {
-        threshold: 0.5
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, options);
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
 
     window.addEventListener('scroll', () => {
         const scrollProgress = document.getElementById('progress-bar');
@@ -80,15 +54,15 @@ function copyLink(event) {
         notification.style.display = 'block';
         setTimeout(() => {
             notification.style.opacity = '1';
-        }, 10);
+        }, 10); // Timeout to trigger the CSS transition
         setTimeout(() => {
             notification.style.opacity = '0';
             setTimeout(() => {
                 notification.style.display = 'none';
-            }, 500);
+            }, 500); // Match this timeout with the CSS transition duration
         }, 3000);
     });
-    toggleShareOptions(); // Hide the share options container after copying link
+    toggleShareOptions(); // Hide the share options container after clicking
 }
 
 function toggleShareOptions() {
